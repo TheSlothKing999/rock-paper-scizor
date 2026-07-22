@@ -26,14 +26,14 @@ let cscore = 0
 function playround(huchoice, comchoice) {
     if ((huchoice == 'paper' && comchoice== 'rock')||(huchoice == 'rock' && comchoice== 'scissors')||(huchoice == 'scissors' && comchoice== 'paper')) {
         hscore++
-        console.log('You won, what a genius!')
+        result.textContent='You won, what a genius!'
     }
     else if ((huchoice == 'scissors' && comchoice== 'rock')||(huchoice == 'paper' && comchoice== 'scissors')||(huchoice == 'rock' && comchoice== 'paper')) {
         cscore++
-        console.log('You lost, what a loser!')
+        result.textContent='You lost, what a loser!'
     }
     else {
-        console.log('Draw, what a mid gameplay!')
+        result.textContent='Draw, what a mid gameplay!'
     }
 }
 function playgame(rounds) {
@@ -51,3 +51,10 @@ function playgame(rounds) {
         console.log('The final winner is...no one...what a waste of time')
     }
 }
+const paper = document.querySelector('#pa')
+const rock = document.querySelector('#ro')
+const scissors = document.querySelector('#sc')
+const result = document.querySelector('#result')
+paper.addEventListener('click',()=>{playround('paper',getcomputerchoice())})
+rock.addEventListener('click',() => {playround('rock',getcomputerchoice())})
+scissors.addEventListener('click',() => {playround('scissors',getcomputerchoice())})
