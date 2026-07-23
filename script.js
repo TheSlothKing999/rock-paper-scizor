@@ -23,6 +23,7 @@ function getuserchoice() {
     }
 let hscore = 0
 let cscore = 0
+let round = 0
 function playround(huchoice, comchoice) {
     if ((huchoice == 'paper' && comchoice== 'rock')||(huchoice == 'rock' && comchoice== 'scissors')||(huchoice == 'scissors' && comchoice== 'paper')) {
         hscore++
@@ -35,26 +36,42 @@ function playround(huchoice, comchoice) {
     else {
         result.textContent='Draw, what a mid gameplay!'
     }
+    round++
+    score.textContent='You '+ hscore +'-'+ cscore +' PC'
+
+    if (round==5) {
+        if (hscore > cscore) {
+            result.textContent='The final winner is...you, congratulations'
+        }
+        else if (cscore > hscore) {
+            result.textContent='The final winner is...the PC, you sucked like usual'
+        }
+        else {
+            result.textContent='The final winner is...no one...what a waste of time'
+        }
+        paper.disabled=true
+        rock.disabled=true
+        scissors.disabled=true
+    }
 }
-function playgame(rounds) {
-    for (let i=1;i<=rounds;i++) {
-        playround(getuserchoice(),getcomputerchoice())
-        console.log('You '+ hscore +'-'+ cscore +' PC')
-    }
-    if (hscore > cscore) {
-        console.log('The final winner is...you, congratulations')
-    }
-    else if (cscore > hscore) {
-        console.log('the final winner is...the PC, you sucked like usual')
-    }
-    else {
-        console.log('The final winner is...no one...what a waste of time')
-    }
+function playgame() {
+    hscore=0
+    cscore=0
+    round=0
+    score.textContent='You 0-0 PC'
+    result.textContent='Choose rock, paper or scissors'
+    paper.disabled=false
+    rock.disabled=false
+    scissors.disabled=false
 }
 const paper = document.querySelector('#pa')
 const rock = document.querySelector('#ro')
 const scissors = document.querySelector('#sc')
 const result = document.querySelector('#result')
+const score = document.querySelector('#score')
+const start =document.querySelector('#start')
+
 paper.addEventListener('click',()=>{playround('paper',getcomputerchoice())})
 rock.addEventListener('click',() => {playround('rock',getcomputerchoice())})
 scissors.addEventListener('click',() => {playround('scissors',getcomputerchoice())})
+start.addEventListener('click',() => {playgame(5)})
